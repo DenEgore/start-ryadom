@@ -1,0 +1,12 @@
+max.denegore.ru {
+    encode gzip
+
+    @api path /api/*
+    handle @api {
+        reverse_proxy api:3001
+    }
+
+    handle {
+        reverse_proxy web:80
+    }
+}

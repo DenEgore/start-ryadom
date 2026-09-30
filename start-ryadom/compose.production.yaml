@@ -1,0 +1,45 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      HOST: 0.0.0.0
+      PORT: 3001
+    restart: unless-stopped
+
+  bot:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    command: ["node", "max-bot.js"]
+    environment:
+      MAX_API_URL: https://platform-api.max.ru
+      MAX_BOT_TOKEN: ${MAX_BOT_TOKEN}
+      MAX_MINIAPP_URL: ${MAX_MINIAPP_URL:-}
+      MAX_POLL_TIMEOUT: ${MAX_POLL_TIMEOUT:-25}
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - web
+      - api
+
+volumes:
+  caddy_data:
+  caddy_config:

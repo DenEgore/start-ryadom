@@ -1,0 +1,28 @@
+{
+  "name": "start-ryadom",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "api": "node server/server.js",
+    "bot": "node server/max-bot.js"
+  },
+  "dependencies": {
+    "@maxhub/max-bot-api": "^0.3.1",
+    "@maxhub/max-ui": "^0.5.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "max-bridge": "^0.0.2",
+    "oxlint": "^1.81.0",
+    "vite": "^8.3.0"
+  }
+}

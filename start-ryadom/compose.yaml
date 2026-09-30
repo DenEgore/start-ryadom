@@ -1,0 +1,28 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4173:80"
+    depends_on:
+      - api
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      PORT: 3001
+    ports:
+      - "3001:3001"
+  bot:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      MAX_API_URL: https://platform-api.max.ru
+      MAX_BOT_TOKEN: ${MAX_BOT_TOKEN}
+      MAX_MINIAPP_URL: ${MAX_MINIAPP_URL:-}
+      MAX_POLL_TIMEOUT: 25
+    depends_on:
+      - api

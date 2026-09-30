@@ -1,0 +1,11 @@
+services:
+  bot:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    command: ["node", "max-bot.js"]
+    environment:
+      MAX_API_URL: https://platform-api.max.ru
+      MAX_BOT_TOKEN: ${MAX_BOT_TOKEN}
+      MAX_MINIAPP_URL: ${MAX_MINIAPP_URL:-}
+    restart: unless-stopped

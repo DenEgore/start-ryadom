@@ -1,0 +1,8 @@
+{
+  "name": "start-ryadom-bot",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@maxhub/max-bot-api": "^0.3.1"
+  }
+}
